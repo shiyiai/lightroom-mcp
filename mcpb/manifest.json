@@ -1,0 +1,167 @@
+{
+  "manifest_version": "0.3",
+  "name": "lightroom-mcp",
+  "display_name": "Lightroom Classic",
+  "version": "0.5.0",
+  "description": "Bridge AI assistants to Adobe Lightroom Classic — search, organize, develop, export.",
+  "long_description": "Connects AI assistants to a running Adobe Lightroom Classic instance via a bundled Lua plugin. Tools cover catalog search, collections, ratings, keywords, raw develop settings, snapshots, undo/redo, sync settings, import and export. The Lightroom plugin is auto-installed into Lightroom's Modules folder on first run; restart Lightroom once after install to load it.",
+  "author": {
+    "name": "Shiyi AI"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shiyiai/lightroom-mcp"
+  },
+  "license": "MIT",
+  "keywords": [
+    "lightroom",
+    "lightroom-classic",
+    "photography",
+    "adobe"
+  ],
+  "server": {
+    "type": "node",
+    "entry_point": "server/dist/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": [
+        "${__dirname}/server/dist/index.js"
+      ],
+      "env": {
+        "LIGHTROOM_MCP_REQUEST_PORT": "${user_config.request_port}",
+        "LIGHTROOM_MCP_RESPONSE_PORT": "${user_config.response_port}"
+      }
+    }
+  },
+  "tools": [
+    {
+      "name": "search_photos",
+      "description": "Search the catalog by filename, keywords, rating, or date."
+    },
+    {
+      "name": "get_selected_photos",
+      "description": "Photos currently selected in Lightroom (or the filmstrip)."
+    },
+    {
+      "name": "get_photo_metadata",
+      "description": "Detailed EXIF + develop metadata for a photo."
+    },
+    {
+      "name": "list_collections",
+      "description": "List all collections and collection sets."
+    },
+    {
+      "name": "create_collection",
+      "description": "Create a new collection."
+    },
+    {
+      "name": "add_to_collection",
+      "description": "Add photos to an existing collection."
+    },
+    {
+      "name": "set_keywords",
+      "description": "Add or remove keywords on photos."
+    },
+    {
+      "name": "set_rating",
+      "description": "Set star rating on photos."
+    },
+    {
+      "name": "import_photos",
+      "description": "Import photos into the catalog."
+    },
+    {
+      "name": "export_photos",
+      "description": "Export photos with format/quality/dimensions."
+    },
+    {
+      "name": "list_develop_presets",
+      "description": "List available Develop presets."
+    },
+    {
+      "name": "list_develop_setting_keys",
+      "description": "List stable Develop keys, known raw keys, quick-develop operations, and controller methods."
+    },
+    {
+      "name": "get_develop_settings_raw",
+      "description": "Read the full raw Lightroom SDK Develop settings table for a photo."
+    },
+    {
+      "name": "set_develop_settings_raw",
+      "description": "Write raw Lightroom SDK Develop setting key/value pairs to photos."
+    },
+    {
+      "name": "adjust_develop_settings",
+      "description": "Apply relative numeric deltas to Develop settings on photos."
+    },
+    {
+      "name": "apply_develop_preset",
+      "description": "Apply a Develop preset to photos."
+    },
+    {
+      "name": "create_develop_snapshot",
+      "description": "Create Develop snapshots for photos."
+    },
+    {
+      "name": "copy_develop_settings",
+      "description": "Copy Develop settings from one photo to others."
+    },
+    {
+      "name": "apply_develop_settings_to_selected",
+      "description": "Copy Develop settings from a source or selected photo to other selected photos."
+    },
+    {
+      "name": "set_develop_settings",
+      "description": "Set Develop settings directly on a photo."
+    },
+    {
+      "name": "quick_develop",
+      "description": "Call Lightroom quick-develop operations on photos."
+    },
+    {
+      "name": "undo_last_mcp_develop_edit",
+      "description": "Restore settings captured before the last MCP-initiated Develop edit."
+    },
+    {
+      "name": "lightroom_undo_status",
+      "description": "Report Lightroom global undo/redo availability."
+    },
+    {
+      "name": "lightroom_undo",
+      "description": "Call Lightroom global undo."
+    },
+    {
+      "name": "lightroom_redo",
+      "description": "Call Lightroom global redo."
+    },
+    {
+      "name": "develop_controller_call",
+      "description": "Call raw LrDevelopController methods for the current Develop photo."
+    }
+  ],
+  "user_config": {
+    "request_port": {
+      "type": "string",
+      "title": "Plugin request port",
+      "description": "TCP port the Lightroom plugin listens on for requests. Must match the Plug-in Manager setting.",
+      "default": "58763",
+      "required": false
+    },
+    "response_port": {
+      "type": "string",
+      "title": "Plugin response port",
+      "description": "TCP port the Lightroom plugin sends responses on. Must match the Plug-in Manager setting.",
+      "default": "58764",
+      "required": false
+    }
+  },
+  "compatibility": {
+    "platforms": [
+      "darwin",
+      "win32"
+    ],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}

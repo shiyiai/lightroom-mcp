@@ -1,0 +1,4 @@
+interface:
+  display_name: "Lightroom MCP"
+  short_description: "Control Lightroom Classic through MCP."
+  default_prompt: "Use $lightroom-mcp to inspect selected photos, make conservative Develop edits, sync settings, and verify results."
